@@ -1,0 +1,7 @@
+For each meeting download the folder in here, and use that to code. 
+The way you download is 
+Nash slot 2
+Kevin slot 3
+Lucas slot 4
+and then at the end of each meeting someone combines all the code and puts it into slot 1
+
