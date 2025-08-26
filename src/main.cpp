@@ -9,7 +9,7 @@
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
     {-13, -12, 11},     // Left Chassis Ports (negative port will reverse it!)
-    {18, 19, 20},  // Right Chassis Ports (negative port will reverse it!)
+    {18, -15, 20},  // Right Chassis Ports (negative port will reverse it!)
 
     //! |---------!!!!!!! CHANGE ME !!!!!!!---------|
     0,      // IMU Port      
@@ -226,13 +226,12 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
-    if (master.get_digital(DIGITAL_L1)){         // in-take through 
+    if (master.get_digital(DIGITAL_L1)){   // in-take through 
       frontIn.move(63.75);
-      backIn.move(63.75);
+      backIn.move(-63.75);
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through
       frontIn.move(-63.75);
       backIn.move(63.75);
-      topIn.move(-63.75);
     } else if (master.get_digital(DIGITAL_R1)){  // mid tier
       frontIn.move(63.75);
       backIn.move(63.75);
