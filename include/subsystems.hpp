@@ -16,9 +16,6 @@ inline std::vector<pros::Motor> intakeMotors = {pros::Motor(9), pros::Motor(8), 
 // PNEUMATICS
 inline pros::adi::Pneumatics LittleW('A', false);
 
-// The distance sensor 
-inline pros::IMU IMU(1);
-
 // The color sensor
 // inline pros::Optical name(6);
 

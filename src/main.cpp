@@ -12,7 +12,7 @@ ez::Drive chassis(
     {-13, 18, 20},  // Right Chassis Ports (negative port will reverse it!)
 
     //! |---------!!!!!!! CHANGE ME !!!!!!!---------|
-    0,      // IMU Port      
+    1,      // IMU Port      
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -82,10 +82,16 @@ void autonomous() {
   chassis.drive_sensor_reset();               // Reset drive sensors to 0
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
+  
+  chassis.pid_drive_set(10_in, 127);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-10_in, 127);
+  chassis.pid_wait();
 
   // Make Blue and Red autonomous objects
   Auton_Functions::BLUE_Auton Blue(autonFunc);
   Auton_Functions::RED_Auton Red(autonFunc);
+  
 
   // Switch conditional statement to choose from any of the 9 scenarios
   switch (autonID){
@@ -246,11 +252,11 @@ void opcontrol() {
       topIn.brake();
     }
 
-    if(master.get_digital(DIGITAL_Y)) { // PNEUMATICS
+    if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
       LittleW.toggle();
-    }
+    } 
 
-    //! CALL BACKS
+   //! CALL BACKS
     // if(master.get_digital_new_press(DIGITAL_R2)) { } // 
     // if(master.get_digital_new_press(DIGITAL_R1)) { } // 
 
