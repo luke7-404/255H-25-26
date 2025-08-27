@@ -13,11 +13,11 @@ inline std::vector<pros::Motor> intakeMotors = {pros::Motor(9), pros::Motor(8), 
 #define backIn intakeMotors[1]
 #define topIn intakeMotors[2]
 
-//* PNEUMATICS
-//inline pros::adi::Pneumatics name('port letter', false);
+// PNEUMATICS
+inline pros::adi::Pneumatics LittleW('A', false);
 
 // The distance sensor 
-// inline pros::Distance name(15);
+inline pros::IMU IMU(1);
 
 // The color sensor
 // inline pros::Optical name(6);

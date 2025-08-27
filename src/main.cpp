@@ -227,32 +227,29 @@ void opcontrol() {
     // . . .
 
     if (master.get_digital(DIGITAL_L1)){   // in-take through 
-      frontIn.move(63.75);
-      backIn.move(-63.75);
+      frontIn.move(70);
+      backIn.move(-70);
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through
-      frontIn.move(-63.75);
-      backIn.move(63.75);
+      frontIn.move(-70);
+      backIn.move(70);
     } else if (master.get_digital(DIGITAL_R1)){  // mid tier
-      frontIn.move(63.75);
-      backIn.move(63.75);
-      topIn.move(-63.75);
+      frontIn.move(70);
+      backIn.move(70);
+      topIn.move(-70);
     } else if (master.get_digital(DIGITAL_R2)){  // top tier
-      frontIn.move(63.75);
-      backIn.move(63.75);
-      topIn.move(63.75);
-    } /*else if (master.get_digital(DIGITAL_A)){  // bot to mid
-      frontIn.move(63.75);
-      backIn.move(-63.75);
-      topIn.move(-63.75);
-    } else if (master.get_digital(DIGITAL_B)){  // bot to top
-      frontIn.move(63.75);
-      backIn.move(-63.75);
-      topIn.move(63.75);
-    }*/ else {                                     // if all else, stop
+      frontIn.move(70);
+      backIn.move(70);
+      topIn.move(70);
+    } else {   // if all else, stop
       frontIn.brake();
       backIn.brake();
       topIn.brake();
     }
+
+    if(master.get_digital(DIGITAL_Y)) { // PNEUMATICS
+      LittleW.toggle();
+    }
+
     //! CALL BACKS
     // if(master.get_digital_new_press(DIGITAL_R2)) { } // 
     // if(master.get_digital_new_press(DIGITAL_R1)) { } // 
