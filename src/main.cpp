@@ -82,11 +82,7 @@ void autonomous() {
   chassis.drive_sensor_reset();               // Reset drive sensors to 0
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
-  
-  chassis.pid_drive_set(10_in, 127);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-10_in, 127);
-  chassis.pid_wait();
+
 
   // Make Blue and Red autonomous objects
   Auton_Functions::BLUE_Auton Blue(autonFunc);
