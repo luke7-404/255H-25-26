@@ -18,7 +18,7 @@ void default_constants() {
   // P, I, D, and Start I
   chassis.pid_drive_constants_set(19.9, 0.01, 200.0);         // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
-  chassis.pid_turn_constants_set(0.5, 0.0, 0.0, 14.0);     // Turn in place constants
+  chassis.pid_turn_constants_set(0.8, 0.0, 3.75, 14.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
   chassis.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
   chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
@@ -58,8 +58,42 @@ void default_constants() {
  * @brief Base function for win point auton (used for the left side of the field)
  */
 void Auton_Functions::AWP1(){
- chassis.pid_turn_set(180_deg, 110);
+ chassis.pid_drive_set(18_in, 110); //Drive forward 24in
  chassis.pid_wait();
+ chassis.pid_turn_set(25_deg, 110); //Turn to face win point
+ chassis.pid_wait();
+ frontIn.move(70); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(20_in, 75); //Drive into win point
+ chassis.pid_wait();
+ chassis.pid_turn_set(45_deg, 110); //Turn to face next balls
+ chassis.pid_wait();
+ chassis.pid_drive_set(10_in, 100); //Drive into win point
+ chassis.pid_wait();
+ frontIn.move(70);
+ backIn.move(70);
+ topIn.move(-70);
+ pros::delay(700);
+ frontIn.brake();
+ backIn.brake();
+ topIn.brake();
+ chassis.pid_drive_set(-14_in, 110); //Back away from win point
+ chassis.pid_wait();
+ chassis.pid_turn_set(95_deg, 110); //Turn to face next balls
+ chassis.pid_wait();
+ frontIn.move(70); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(35_in, 110); //Drive into next balls
+ chassis.pid_wait();
+ chassis.pid_drive_set(15_in, 75); //Back away from balls
+ chassis.pid_wait();
+ chassis.pid_turn_set(-44_deg, 110); //Turn to face goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(21_in, 110); //Drive into goal
+ chassis.pid_wait();
+ frontIn.move(-70);
+ backIn.move(70);
+ pros::delay(1500);
 }
 
 /**
@@ -67,10 +101,6 @@ void Auton_Functions::AWP1(){
  */
 void Auton_Functions::AWP2(){
   // Drive forward 24in
-chassis.pid_drive_set(72_in, 110);
-chassis.pid_wait();
-chassis.pid_drive_set(-72_in, 110);
-chassis.pid_wait();
 }
 
 /**
