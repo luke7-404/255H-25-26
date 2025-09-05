@@ -186,6 +186,7 @@ void Auton_Functions::RED_Auton::r3(){
  backIn.move(70); //Outake balls
  topIn.move(-70); //Outake balls
  pros::delay(2000);
+ //test
 }
 
 //? BLUE FUNCTS
