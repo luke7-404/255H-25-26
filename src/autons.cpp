@@ -100,7 +100,57 @@ void Auton_Functions::AWP1(){
  * @brief mirrored function for win point auton (used for the right side of the field)
  */
 void Auton_Functions::AWP2(){
-  // Drive forward 24in
+ frontIn.move(70); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(32.7_in, 75);//Drive into balls
+ chassis.pid_wait();
+ chassis.pid_turn_set(60_deg, 127);//Turn to mid goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(20.7_in, 127);//Drive into mid goal
+ chassis.pid_wait();
+ frontIn.move(70); //Outake balls
+ backIn.move(70); //Outake balls
+ topIn.move(-70); //Outake balls
+ pros::delay(700); 
+ frontIn.move(70); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_turn_set(155_deg, 127);//Turn to low goal balls
+ chassis.pid_wait();
+ chassis.pid_drive_set(16.2_in, 127);//Drive into low goal balls
+ chassis.pid_wait();
+ chassis.pid_turn_set(106_deg, 127);//Turn to low goal balls
+ chassis.pid_wait();
+ chassis.pid_drive_set(22_in, 75);//Drive into low goal balls
+ chassis.pid_wait();
+ chassis.pid_turn_set(335_deg, 127);//Turn to low goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(17.8_in, 127);//Drive into low goal
+ chassis.pid_wait();
+ frontIn.move(70); //Outake balls
+ backIn.move(70); //Outake balls
+ topIn.move(-70); //Outake balls
+ pros::delay(1500); 
+ frontIn.move(70); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(-57.2_in, 127);//Back up to infront of match load
+ chassis.pid_wait();
+ chassis.pid_turn_set(195_deg, 127);//Turn to match load
+ chassis.pid_wait();
+ LittleW.extend(); //Extend Little Will
+ chassis.pid_drive_set(13.1_in, 127);//Drive into match load
+ chassis.pid_wait();
+ pros::delay(1500); //Wait to load balls
+ chassis.pid_drive_set(-35.1_in, 127);//Back away from match load
+ LittleW.retract(); //Retract Little Will
+ chassis.pid_wait();
+ chassis.pid_turn_set(15_deg, 127);//Turn to long goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(4_in, 127);//Drive into long goal
+ chassis.pid_wait();
+ frontIn.move(70);
+ backIn.move(70);
+ topIn.move(70);
+
 }
 
 /**
@@ -116,7 +166,8 @@ void Auton_Functions::Skills(){
  * 
  */
 void Auton_Functions::RED_Auton::r1(){
- 
+  chassis.pid_drive_set(72_in, 127); //Drive forward 12in
+  chassis.pid_wait();
 }
 
 /**
@@ -124,7 +175,8 @@ void Auton_Functions::RED_Auton::r1(){
  * 
  */
 void Auton_Functions::RED_Auton::r2(){
-  
+  chassis.pid_turn_set(360_deg, 127); //Turn to face win point
+  chassis.pid_wait();
 }
 
 /**
