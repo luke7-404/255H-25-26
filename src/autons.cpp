@@ -54,9 +54,7 @@ void default_constants() {
 // . . .
 
 
-/**
- * @brief Base function for win point auton (used for the left side of the field)
- */
+
 void Auton_Functions::AWP1(){
  chassis.pid_drive_set(18_in, 110); //Drive forward 24in
  chassis.pid_wait();
@@ -96,9 +94,7 @@ void Auton_Functions::AWP1(){
  pros::delay(1500);
 }
 
-/**
- * @brief mirrored function for win point auton (used for the right side of the field)
- */
+//Test AWP 2
 void Auton_Functions::AWP2(){
  frontIn.move(70); //Spin to intake balls
  backIn.move(-70); //Spin to intake balls
@@ -129,7 +125,7 @@ void Auton_Functions::AWP2(){
  frontIn.move(70); //Outake balls
  backIn.move(70); //Outake balls
  topIn.move(-70); //Outake balls
- pros::delay(1500); 
+ pros::delay(1500); //CHANGE TO CORRECT TIME
  frontIn.move(70); //Spin to intake balls
  backIn.move(-70); //Spin to intake balls
  chassis.pid_drive_set(-57.2_in, 127);//Back up to infront of match load
@@ -150,60 +146,58 @@ void Auton_Functions::AWP2(){
  frontIn.move(70);
  backIn.move(70);
  topIn.move(70);
-
 }
 
-/**
- * @brief function for Skills auton
- */
+
 void Auton_Functions::Skills(){
 
 }
 
 //! RED FUNCTS
-/**
- * @brief base function for goal rush (we didn't complete it)
- * 
- */
+
 void Auton_Functions::RED_Auton::r1(){
   chassis.pid_drive_set(72_in, 127); //Drive forward 12in
   chassis.pid_wait();
 }
 
-/**
- * @brief base function for ring rush (best auton we've had)
- * 
- */
+
 void Auton_Functions::RED_Auton::r2(){
   chassis.pid_turn_set(360_deg, 127); //Turn to face win point
   chassis.pid_wait();
 }
 
-/**
- * @brief These are functions that we never got to develop/ mirror 
- */
-void Auton_Functions::RED_Auton::r3(){
 
+void Auton_Functions::RED_Auton::r3(){
+ frontIn.move(70); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(40.2_in, 127); //Drive off park to balls
+ chassis.pid_wait();
+ chassis.pid_turn_set(355_deg, 127);// Turn slightly to balls under long goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(31.3_in, 127);// Drive into balls under long goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(-31.3_in, 127); //Drive back to middle goal area
+ chassis.pid_wait();
+ chassis.pid_turn_set(95_deg, 127);// Turn to middle goal
+ chassis.pid_wait();
+ chassis.pid_drive_set(18.1_in, 127);
+ chassis.pid_wait();
+ frontIn.move(70); //Outake balls
+ backIn.move(70); //Outake balls
+ topIn.move(-70); //Outake balls
+ pros::delay(2000);
 }
 
 //? BLUE FUNCTS
-/**
- * @brief These are functions that are mirrored so develop red functs 
- */
+
 void Auton_Functions::BLUE_Auton::b1(){
-  chassis.odom_theta_flip();
-  
-  RED_Auton::r1();
+ 
 }
 
 void Auton_Functions::BLUE_Auton::b2(){
-  chassis.odom_theta_flip();
-  
-  RED_Auton::r2();
+
 }
 
 void Auton_Functions::BLUE_Auton::b3(){
-  chassis.odom_theta_flip();
   
-  RED_Auton::r3();
 }
