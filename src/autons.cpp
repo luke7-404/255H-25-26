@@ -114,13 +114,13 @@ void Auton_Functions::AWP2(){
  pros::delay(700); 
  frontIn.move(70); //Spin to intake balls
  backIn.move(-70); //Spin to intake balls
- chassis.pid_turn_set(155_deg, 127);//Turn to low goal balls
- chassis.pid_wait();
- chassis.pid_drive_set(16.2_in, 127);//Drive into low goal balls
+ chassis.pid_drive_set(20.7_in, 127);//Drive out of low goal
  chassis.pid_wait();
  chassis.pid_turn_set(106_deg, 127);//Turn to low goal balls
  chassis.pid_wait();
- chassis.pid_drive_set(22_in, 75);//Drive into low goal balls
+ chassis.pid_drive_set(37.1_in, 127);//Drive most of distance to low goal balls
+ chassis.pid_wait();
+ chassis.pid_drive_set(5_in, 75);//Drive rest of distance to low goal balls
  chassis.pid_wait();
  chassis.pid_turn_set(335_deg, 127);//Turn to low goal
  chassis.pid_wait();
