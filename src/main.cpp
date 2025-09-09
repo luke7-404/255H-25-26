@@ -229,7 +229,7 @@ void opcontrol() {
     // . . .
 
     if (master.get_digital(DIGITAL_L1)){   // in-take through 
-      frontIn.move(70);
+      frontIn.move(100);
       backIn.move(-70);
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through
       frontIn.move(-65);
