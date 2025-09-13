@@ -241,7 +241,7 @@ void opcontrol() {
     } else if (master.get_digital(DIGITAL_R2)){  // top tier
       frontIn.move(70);
       backIn.move(70);
-      topIn.move(70);
+      topIn.move(100);
     } else {   // if all else, stop
       frontIn.brake();
       backIn.brake();

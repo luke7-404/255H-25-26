@@ -117,7 +117,57 @@ void Auton_Functions::AWP2(){
 
 
 void Auton_Functions::Skills(){
-
+ chassis.pid_drive_set(47.3_in, 100);//Drive off park zone and toward match load
+ chassis.pid_wait();
+ chassis.pid_turn_set(270_deg, 80); //Turn to match load
+ chassis.pid_wait();
+ LittleW.extend(); //Extend Little Will
+ frontIn.move(100); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(16.2, 80); //Drive into match load
+ chassis.pid_wait();
+ pros::delay(700);
+ chassis.pid_drive_set(-21_in, 90); //Drive out of match load
+ chassis.pid_wait();
+ chassis.pid_turn_set(90_deg, 90); //Turn to high goal
+ chassis.pid_wait();
+ Aligner.toggle(); //Put aligner down
+ LittleW.retract(); //Retract Little Will
+ chassis.pid_drive_set(10_in, 80); //Drive into high goal
+ chassis.pid_wait();
+ frontIn.move(70); // Outake balls
+ backIn.move(70); // Outake balls
+ topIn.move(70); // Outake balls
+ pros::delay(2000);
+ frontIn.move(0);
+ backIn.move(0);
+ topIn.move(0);
+ chassis.pid_drive_set(-9_in, 90); //Back away from high goal
+ chassis.pid_wait();
+ chassis.pid_turn_set(186_deg, 90); //Turn to other side of field 
+ chassis.pid_wait();
+ chassis.pid_drive_set(-94.97_in, 90); //Drive to other side of field
+ chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, 80); //Turn to match load
+ chassis.pid_wait();
+ LittleW.extend(); //Extend Little Will
+ frontIn.move(100); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(-16.2, 80); //Drive into match load
+ chassis.pid_wait();
+ pros::delay(400);
+ chassis.pid_drive_set(-35_in, 90); //Drive out of match load
+ chassis.pid_wait(); 
+ chassis.pid_turn_set(90_deg, 90); //Turn to high goal
+ chassis.pid_wait();
+ Aligner.toggle(); //Put aligner down
+ LittleW.retract(); //Retract Little Will
+ chassis.pid_drive_set(5_in, 80); //Drive into high goal
+ chassis.pid_wait();
+ frontIn.move(70); // Outake balls
+ backIn.move(70); // Outake balls
+ topIn.move(70); // Outake balls
+ pros::delay(3000);
 }
 
 //! RED FUNCTS
@@ -133,31 +183,30 @@ void Auton_Functions::RED_Auton::r2(){
   backIn.move(-70); //Spin to intake balls
   chassis.pid_drive_set(34.7_in, 70); //Drive into balls
   chassis.pid_wait();
-  chassis.pid_drive_set(-8_in, 80); //Back to line up
+  chassis.pid_drive_set(-9_in, 80); //Back to line up
   chassis.pid_wait();
   frontIn.move(0);
   backIn.move(0);
-  chassis.pid_turn_set(295_deg, 80); //Turn to mid goal
+  chassis.pid_turn_set(300_deg, 80); //Turn to mid goal
   chassis.pid_wait();
-  pros::delay(500); //Wait to get lined up
-  chassis.pid_drive_set(19_in, 80); //Drive into mid goal
+  chassis.pid_drive_set(18_in, 80); //Drive into mid goal
   chassis.pid_wait();
- frontIn.move(-50); //Outake balls
+  frontIn.move(-50); //Outake balls
   backIn.move(65); //Outake balls
   pros::delay(2300);
   frontIn.move(0); 
   backIn.move(0);
   topIn.move(0);
-  chassis.pid_drive_set(-46_in, 80); //Drive out of middle goal to match load
+  chassis.pid_drive_set(-49_in, 80); //Drive out of middle goal to match load
   chassis.pid_wait();
   chassis.pid_turn_set(170_deg, 80); //Turn to match load
   chassis.pid_wait();
-  pros::delay(500);
+  pros::delay(200);
   LittleW.extend(); //Extend Little Will
   frontIn.move(100); //Spin to intake balls
   backIn.move(-70); //Spin to intake balls
-  pros::delay(300);
-  chassis.pid_drive_set(23.93_in, 60);  //Drive into match load
+  pros::delay(100);
+  chassis.pid_drive_set(23.93_in, 70);  //Drive into match load
   chassis.pid_wait();
   chassis.pid_drive_set(-20.1_in, 100); //Back away from match load
   chassis.pid_wait(); 
@@ -165,12 +214,12 @@ void Auton_Functions::RED_Auton::r2(){
   LittleW.retract(); //Retract Little Will
   chassis.pid_turn_set(355_deg, 80); //Turn to long goal
   chassis.pid_wait();
-  chassis.pid_drive_set(13_in, 80); //Drive into long goal
+  chassis.pid_drive_set(10_in, 80); //Drive into long goal
   chassis.pid_wait();
   frontIn.move(70); // Outake balls
   backIn.move(70); // Outake balls
   topIn.move(70); // Outake balls
-  pros::delay(4000); 
+  pros::delay(15000); 
 }
 
 
@@ -185,7 +234,7 @@ void Auton_Functions::RED_Auton::r3(){
  backIn.move(0);
  chassis.pid_turn_set(65_deg, 80);//Turn to mid goal
  chassis.pid_wait();
- chassis.pid_drive_set(16_in, 80);//Drive into mid goal
+ chassis.pid_drive_set(15.5_in, 80);//Drive into mid goal
  chassis.pid_wait();
  frontIn.move(70); //Outake balls
  backIn.move(70); //Outake balls
@@ -198,15 +247,14 @@ void Auton_Functions::RED_Auton::r3(){
  chassis.pid_wait();
  chassis.pid_turn_set(190_deg, 80);// Turn to match load
  chassis.pid_wait();
- pros::delay(500); //Wait to get lined up
+ pros::delay(200); //Wait to get lined up
  LittleW.extend(); //Extend Little Will
- frontIn.move(100); //Spin to intake balls
+ frontIn.move(80); //Spin to intake balls
  backIn.move(-70); //Spin to intake balls
- pros::delay(300); //Wait for Little Will to extend and stuff
+ pros::delay(100); //Wait for Little Will to extend and stuff
  LittleW.extend(); //Extend Little Will
  chassis.pid_drive_set(23.93_in, 70);//Drive into match load
  chassis.pid_wait(); 
- pros::delay(25); //Wait to get balls
  chassis.pid_drive_set(-20.1_in, 80);//Back away from match load
  chassis.pid_wait();
  Aligner.toggle(); //Put aligner down
@@ -216,9 +264,9 @@ void Auton_Functions::RED_Auton::r3(){
  chassis.pid_drive_set(10.55_in, 80);//Drive into long goal 
  chassis.pid_wait();
  frontIn.move(70); // Outake balls
- backIn.move(70); // Outake balls
- topIn.move(70); // Outake balls
- pros::delay(4000); // Wait so it can run and stuff
+ backIn.move(90); // Outake balls
+ topIn.move(80); // Outake balls
+ pros::delay(15000); // Wait so it can run and stuff
 }
 
 //? BLUE FUNCTS
