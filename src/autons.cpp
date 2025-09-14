@@ -19,6 +19,7 @@ void default_constants() {
   chassis.pid_drive_constants_set(19.9, 0.01, 200.0);         // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
   chassis.pid_turn_constants_set(0.8, 0.0, 3.75, 14.0);     // Turn in place constants
+  chassis.pid_turn_constants_set(0.8, 0.0, 3.75, 14.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
   chassis.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
   chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
@@ -117,20 +118,16 @@ void Auton_Functions::AWP2(){
 
 
 void Auton_Functions::Skills(){
- chassis.pid_drive_set(47.3_in, 90);//Drive off park zone and toward match load
+ chassis.pid_drive_set(47.3_in, 100);//Drive off park zone and toward match load
  chassis.pid_wait();
  chassis.pid_turn_set(270_deg, 80); //Turn to match load
  chassis.pid_wait();
  LittleW.extend(); //Extend Little Will
  frontIn.move(100); //Spin to intake balls
  backIn.move(-70); //Spin to intake balls
- chassis.pid_drive_set(16.2, 70); //Drive into match load
+ chassis.pid_drive_set(16.2, 80); //Drive into match load
  chassis.pid_wait();
- chassis.pid_drive_set(-7_in, 100); //Back away from match load
- chassis.pid_wait();
- chassis.pid_drive_set(7_in, 50); //Drive forward a bit
- chassis.pid_wait();
- pros::delay(1500);
+ pros::delay(700);
  chassis.pid_drive_set(-21_in, 90); //Drive out of match load
  chassis.pid_wait();
  chassis.pid_turn_set(90_deg, 90); //Turn to high goal
@@ -139,36 +136,40 @@ void Auton_Functions::Skills(){
  LittleW.retract(); //Retract Little Will
  chassis.pid_drive_set(10_in, 80); //Drive into high goal
  chassis.pid_wait();
- chassis.pid_drive_set(-4_in, 127); //Back away from high goal
+ frontIn.move(70); // Outake balls
+ backIn.move(70); // Outake balls
+ topIn.move(70); // Outake balls
+ pros::delay(2000);
+ frontIn.move(0);
+ backIn.move(0);
+ topIn.move(0);
+ chassis.pid_drive_set(-9_in, 90); //Back away from high goal
  chassis.pid_wait();
- chassis.pid_drive_set(4_in, 127); //Drive into high goal
+ chassis.pid_turn_set(186_deg, 90); //Turn to other side of field 
+ chassis.pid_wait();
+ chassis.pid_drive_set(-94.97_in, 90); //Drive to other side of field
+ chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, 80); //Turn to match load
+ chassis.pid_wait();
+ LittleW.extend(); //Extend Little Will
+ frontIn.move(100); //Spin to intake balls
+ backIn.move(-70); //Spin to intake balls
+ chassis.pid_drive_set(-16.2, 80); //Drive into match load
+ chassis.pid_wait();
+ pros::delay(400);
+ chassis.pid_drive_set(-35_in, 90); //Drive out of match load
+ chassis.pid_wait(); 
+ chassis.pid_turn_set(90_deg, 90); //Turn to high goal
+ chassis.pid_wait();
+ Aligner.toggle(); //Put aligner down
+ LittleW.retract(); //Retract Little Will
+ chassis.pid_drive_set(5_in, 80); //Drive into high goal
  chassis.pid_wait();
  frontIn.move(70); // Outake balls
  backIn.move(70); // Outake balls
  topIn.move(70); // Outake balls
- pros::delay(5000);
- frontIn.move(0);
- backIn.move(0);
- topIn.move(0);
- chassis.pid_drive_set(-8_in, 90); //Back away from high goal
- chassis.pid_wait();
- chassis.pid_turn_set(180_deg, 90); //Turn to other side of field 
- chassis.pid_wait();
- frontIn.move(-100);
- backIn.move(100);
- chassis.pid_drive_set(25_in, 90); //Drive to other side of field
- chassis.pid_wait();
- chassis.pid_turn_set(270_deg, 80); //Turn to match load
- chassis.pid_wait();
- chassis.pid_drive_set(18, 80); //Drive into match load
- chassis.pid_wait();
- chassis.pid_swing_set(ez::RIGHT_SWING, 180_deg, 90); //Swing to face the wall
- chassis.pid_wait();
- chassis.pid_drive_set(-10_in, 90); //Back up to wall
- chassis.pid_wait();
- chassis.pid_drive_set(55_in, 127); //Back up to wall
- chassis.pid_wait();
-
+ pros::delay(3000);
+ //test
 }
 
 //! RED FUNCTS
