@@ -229,10 +229,10 @@ void opcontrol() {
     // . . .
 
     if (master.get_digital(DIGITAL_L1)){   // in-take through 
-      frontIn.move(70);
+      frontIn.move(100);
       backIn.move(-70);
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through
-      frontIn.move(-70);
+      frontIn.move(-65);
       backIn.move(65);
     } else if (master.get_digital(DIGITAL_R1)){  // mid tier
       frontIn.move(70);
@@ -241,7 +241,7 @@ void opcontrol() {
     } else if (master.get_digital(DIGITAL_R2)){  // top tier
       frontIn.move(70);
       backIn.move(70);
-      topIn.move(70);
+      topIn.move(100);
     } else {   // if all else, stop
       frontIn.brake();
       backIn.brake();
@@ -251,6 +251,10 @@ void opcontrol() {
     if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
       LittleW.toggle();
     } 
+
+    if(master.get_digital_new_press(DIGITAL_RIGHT)) { // ALIGNER
+      Aligner.toggle();
+    }
 
    //! CALL BACKS
     // if(master.get_digital_new_press(DIGITAL_R2)) { } // 
