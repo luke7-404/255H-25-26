@@ -5,14 +5,14 @@
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
-// Chassis constructor
+// Chassis constructor.
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-11, -12, 15},     // Left Chassis Ports (negative port will reverse it!)
-    {-13, 18, 20},  // Right Chassis Ports (negative port will reverse it!)
+    {-11, -12, 13 },     // Left Chassis Ports (negative port will reverse it!)
+    {-1, 2 ,3},  // Right Chassis Ports (negative port will reverse it!)
 
    
-    1,      // IMU Port      
+    4,      // IMU Port      
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -219,42 +219,39 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   while (true) {
-    // Gives you some extras to make EZ-Template ezier
-    ez_template_extras();
-
-    chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
-
-    // . . .
+// . . .
     // Put more user control code here!
     // . . .
 
-    if (master.get_digital(DIGITAL_L1)){   // in-take through 
-      frontIn.move(100);
-      backIn.move(-70);
-    } else if (master.get_digital(DIGITAL_L2)){  // out-take through
-      frontIn.move(-65);
-      backIn.move(65);
-    } else if (master.get_digital(DIGITAL_R1)){  // mid tier
-      frontIn.move(70);
-      backIn.move(70);
-      topIn.move(-70);
-    } else if (master.get_digital(DIGITAL_R2)){  // top tier
-      frontIn.move(70);
-      backIn.move(70);
-      topIn.move(100);
-    } else {   // if all else, stop
-      frontIn.brake();
-      backIn.brake();
-      topIn.brake();
+    if (master.get_digital(DIGITAL_L1)){   // in-take mid
+      bottomIntake.move(-127);
+      middleIntake.move(-127);
+      topIntake.move(127);
+    } else if (master.get_digital(DIGITAL_L2)){  // in-take high
+      bottomIntake.move(-127);
+      middleIntake.move(127);
+      topIntake.move(127);
+      } else if  (master.get_digital(DIGITAL_R2)){  // in-take high
+      bottomIntake.move(127);
+      middleIntake.move(127);
+      topIntake.move(-127);
+      } else {
+      bottomIntake.brake();
+      middleIntake.brake();
+      topIntake.brake();
     }
 
     if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
-      LittleW.toggle();
+      Wings.toggle();
     } 
 
     if(master.get_digital_new_press(DIGITAL_RIGHT)) { // ALIGNER
       Aligner.toggle();
     }
+    // Gives you some extras to make EZ-Template ezier
+    ez_template_extras();
+
+    chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
 
    //! CALL BACKS
     // if(master.get_digital_new_press(DIGITAL_R2)) { } // 
