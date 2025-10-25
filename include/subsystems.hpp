@@ -8,7 +8,7 @@ extern Drive chassis;
 // Your motors, sensors, etc. should go here.  Below are examples
 
 // intake motor group
-inline std::vector<pros::Motor> intakeMotors = {pros::Motor(9), pros::Motor(8), pros::Motor(10)};
+inline std::vector<pros::Motor> intakeMotors = {pros::Motor(10), pros::Motor(14), pros::Motor(9)};
 #define frontIn intakeMotors[0]
 #define backIn intakeMotors[1]
 #define topIn intakeMotors[2]
