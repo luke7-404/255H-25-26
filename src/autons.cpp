@@ -92,7 +92,7 @@ void Auton_Functions::RED_Auton::r1(){
   chassis.pid_wait();
   chassis.pid_turn_set(257_deg, 90);
   chassis.pid_wait();
-  chassis.pid_drive_set(-13.75_in, 50);
+  chassis.pid_drive_set(-15.5_in, 50);
   chassis.pid_wait();
   //! outakes balls
   frontIn.move(100);
@@ -100,18 +100,19 @@ void Auton_Functions::RED_Auton::r1(){
   topIn.move(-100);
   pros::delay(1500);
   //! goes to line up with the loader
-  chassis.pid_drive_set(48_in, 80);
+  chassis.pid_drive_set(52_in, 80);
   chassis.pid_wait();
-  chassis.pid_turn_set(210_deg, 90);
+  chassis.pid_turn_set(215_deg, 90);
   chassis.pid_wait(); 
   Wings.set_value(true);
+  pros::delay(500);
   frontIn.move(100);
   backIn.move(-100);
-   chassis.pid_drive_set(15_in, 40);
+   chassis.pid_drive_set(15_in, 100);
    chassis.pid_wait(); 
    pros::delay(500);
     Aligner.set_value(true);
-   chassis.pid_drive_set(-25_in, 60);
+   chassis.pid_drive_set(-27_in, 60);
    chassis.pid_wait();
     frontIn.move(-100);
      backIn.move(100);
