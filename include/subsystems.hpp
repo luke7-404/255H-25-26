@@ -14,7 +14,7 @@ inline std::vector<pros::Motor> intakeMotors = {pros::Motor(10), pros::Motor(14)
 #define topIn intakeMotors[2]
 
 // PNEUMATICS
-inline pros::adi::Pneumatics LittleW('A', false);
+inline pros::adi::Pneumatics Wings('A', false);
 inline pros::adi::Pneumatics Aligner('D', false);
 
 // The color sensor

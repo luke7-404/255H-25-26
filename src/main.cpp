@@ -5,11 +5,16 @@
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
-// Chassis constructor
+// Chassis constructor.
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
+<<<<<<< HEAD
     {-11, -12, 13},     // Left Chassis Ports (negative port will reverse it!)
     {1, 2, -3},  // Right Chassis Ports (negative port will reverse it!)
+=======
+    {-11, -12, 13 },     // Left Chassis Ports (negative port will reverse it!)
+    {-1, 2 ,3},  // Right Chassis Ports (negative port will reverse it!)
+>>>>>>> 7ecf671c0b4f363d56d4bac88df00aebc41f782c
 
    
     4,      // IMU Port      
@@ -219,12 +224,7 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   while (true) {
-    // Gives you some extras to make EZ-Template ezier
-    ez_template_extras();
-
-    chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
-
-    // . . .
+// . . .
     // Put more user control code here!
     // . . .
 
@@ -250,12 +250,16 @@ void opcontrol() {
     }
 
     if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
-      LittleW.toggle();
+      Wings.toggle();
     } 
 
     if(master.get_digital_new_press(DIGITAL_RIGHT)) { // ALIGNER
       Aligner.toggle();
     }
+    // Gives you some extras to make EZ-Template ezier
+    ez_template_extras();
+
+    chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
 
    //! CALL BACKS
     // if(master.get_digital_new_press(DIGITAL_R2)) { } // 
