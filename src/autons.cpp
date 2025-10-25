@@ -83,8 +83,7 @@ void Auton_Functions::RED_Auton::r1(){
  //! with the rare triple grab
  frontIn.move(100);
   backIn.move(-100);
-  chassis.pid_drive_set(32_in, 40);
- chassis.pid_wait_until(24_in);
+  chassis.pid_drive_set(29_in, 40);
  pros::delay(1000);
   chassis.pid_wait();
 
@@ -105,15 +104,19 @@ void Auton_Functions::RED_Auton::r1(){
   chassis.pid_wait();
   chassis.pid_turn_set(210_deg, 90);
   chassis.pid_wait(); 
-  LittleW.set_value(true);
+  Wings.set_value(true);
   frontIn.move(100);
   backIn.move(-100);
    chassis.pid_drive_set(15_in, 40);
    chassis.pid_wait(); 
-   pros::delay(2000);
-     Aligner.set_value(true);
+   pros::delay(500);
+    Aligner.set_value(true);
    chassis.pid_drive_set(-25_in, 60);
    chassis.pid_wait();
+    frontIn.move(-100);
+     backIn.move(100);
+    topIn.move(100);
+       pros:delay(1000);
    frontIn.move(100);
       backIn.move(-100);
       topIn.move(100);
