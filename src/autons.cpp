@@ -58,58 +58,10 @@ void default_constants() {
 
 //Solo AWP 
 void Auton_Functions::AWP1(){
- //! intake and move to get the 3 balls in the center, gets 2-1 of them most of the time
- //! with the rare triple grab
- frontIn.move(100);
-  backIn.move(-100);
-  chassis.pid_drive_set(29_in, 40);
- pros::delay(1000);
-  chassis.pid_wait();
 
-  //! moves back and turns to line up with the mid goal
-  chassis.pid_drive_set(-5_in, 50);
-  chassis.pid_wait();
-  chassis.pid_turn_set(257_deg, 90);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-15.5_in, 50);
-  chassis.pid_drive_set(-15_in, 50);
-  chassis.pid_wait();
-  //! outakes balls
-  frontIn.move(100);
-  backIn.move(-100);
-  topIn.move(-100);
-  pros::delay(1500);
-  //! goes to line up with the loader
-  chassis.pid_drive_set(52_in, 80);
-  chassis.pid_wait();
-  chassis.pid_turn_set(215_deg, 90);
-  chassis.pid_wait(); 
-  Wings.set_value(true);
-  pros::delay(500);
-  frontIn.move(100);
-  backIn.move(-100);
-   chassis.pid_drive_set(15_in, 100);
-   chassis.pid_wait(); 
-   pros::delay(500);
-    Aligner.set_value(true);
-   chassis.pid_drive_set(-27_in, 60);
-   chassis.pid_wait();
-    frontIn.move(-100);
-     backIn.move(100);
-    topIn.move(100);
-       pros:delay(1000);
-   frontIn.move(100);
-      backIn.move(-100);
-      topIn.move(100);
 }
 
 void Auton_Functions::AWP2(){
-  chassis.pid_turn_set(180_deg, 80); //Turn to match load
-chassis.pid_wait();
-chassis.pid_turn_set(90_deg, 80); //Turn to match load
-chassis.pid_wait();
-chassis.pid_turn_set(270_deg, 80); //Turn to match load
-pros::delay(1000);
 }
 
 void Auton_Functions::Skills(){
@@ -232,8 +184,6 @@ void Auton_Functions::RED_Auton::r3(){
 
 //* 8 Ball Long Right
 void Auton_Functions::BLUE_Auton::b1(){
- //todo add ram as last movement
- 
 }
 
 //* 5 Mid 3 Long Right
