@@ -56,29 +56,8 @@ void default_constants() {
 
 
 
+//Solo AWP 
 void Auton_Functions::AWP1(){
- 
-}
-
-//Test AWP 2
-void Auton_Functions::AWP2(){
-  chassis.pid_turn_set(180_deg, 80); //Turn to match load
-chassis.pid_wait();
-chassis.pid_turn_set(90_deg, 80); //Turn to match load
-chassis.pid_wait();
-chassis.pid_turn_set(270_deg, 80); //Turn to match load
-pros::delay(1000);
-}
-
-
-void Auton_Functions::Skills(){
- 
- //test
-}
-
-//! RED FUNCTS
-
-void Auton_Functions::RED_Auton::r1(){
  //! intake and move to get the 3 balls in the center, gets 2-1 of them most of the time
  //! with the rare triple grab
  frontIn.move(100);
@@ -92,7 +71,7 @@ void Auton_Functions::RED_Auton::r1(){
   chassis.pid_wait();
   chassis.pid_turn_set(257_deg, 90);
   chassis.pid_wait();
-  chassis.pid_drive_set(-13.75_in, 50);
+  chassis.pid_drive_set(-15_in, 50);
   chassis.pid_wait();
   //! outakes balls
   frontIn.move(100);
@@ -100,17 +79,18 @@ void Auton_Functions::RED_Auton::r1(){
   topIn.move(-100);
   pros::delay(1500);
   //! goes to line up with the loader
-  chassis.pid_drive_set(48_in, 80);
+  chassis.pid_drive_set(50_in, 80);
   chassis.pid_wait();
-  chassis.pid_turn_set(210_deg, 90);
+  chassis.pid_turn_set(215_deg, 90);
   chassis.pid_wait(); 
-  Wings.set_value(true);
+  pros:delay(500);
+  LittleW.set_value(true);
   frontIn.move(100);
   backIn.move(-100);
    chassis.pid_drive_set(15_in, 40);
    chassis.pid_wait(); 
    pros::delay(500);
-    Aligner.set_value(true);
+   Wings.set_value(true);
    chassis.pid_drive_set(-25_in, 60);
    chassis.pid_wait();
     frontIn.move(-100);
@@ -120,49 +100,128 @@ void Auton_Functions::RED_Auton::r1(){
    frontIn.move(100);
       backIn.move(-100);
       topIn.move(100);
-
-/*
- //! Drive 6 of the 24 inches at 30 speed then go to 110 speed
-  chassis.pid_drive_set(24_in, 30);
- chassis.pid_wait_until(6_in);
-  chassis.pid_wait();
-
- chassis.slew_drive_set(true); //! Set the drive movements to slew movements
- chassis.slew_drive_constants_set(3_in, 50); //! Start at 50 percent speed for 3 inches
- //! Left Side
- //! ADD PISTON AND INTAKE COMMANDS
- chassis.pid_drive_set(47.53_in, 100, true); //! Drive off park bar
- chassis.pid_wait_quick();
- //! Little will
- chassis.pid_turn_set(270_deg, 100, false); //! Turn to match load
- chassis.pid_wait_quick();
- //! Intake
- chassis.pid_drive_set(16.53_in, 100, true); //! Drive into match load
- chassis.pid_wait_quick();
- pros::delay(100); //! CHANGE TO CORRECT TIME
- chassis.pid_drive_set(39.27_in, 100, true); //! Drive into long goal
- chassis.pid_wait_quick();
- //! Open wings
- //! Stop Intake
- chassis.pid_drive_set(-15.51_in, 100, false); //! Drive out of long goal
- chassis.pid_wait_quick();
- chassis.pid_turn_set(140_deg, 100, false); //! Turn to middle 3 balls
- chassis.pid_wait_quick();
- //! Close wings
- chassis.pid_drive_set(31.69_in, 100, false);//! Drive to middle balls
- chassis.pid_wait_until(28_in); //! Wait until it gets to 28
- chassis.pid_speed_max_set(60); //! Set speed to 60 when it reaches 28
- chassis.pid_wait_quick();
- chassis.pid_drive_set(17.24_in, 100, true); //! Drive rest of distance to middle goal
- chassis.pid_wait_quick();
- //! Intake*/
 }
 
+void Auton_Functions::AWP2(){
+  chassis.pid_turn_set(180_deg, 80); //Turn to match load
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, 80); //Turn to match load
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, 80); //Turn to match load
+pros::delay(1000);
+}
 
-void Auton_Functions::RED_Auton::r2(){
+void Auton_Functions::Skills(){
+ 
+}
+
+//! RED FUNCTS
+
+//* 8 Ball Long Left
+void Auton_Functions::RED_Auton::r1(){
+  //todo make swing movements work
+  //todo tune speed on movements
+  frontIn.move(100); //Intake
+  backIn.move(-100); //Intake
+  //todo add correct degree 
+  //todo find timing for little will to grab balls
+  chassis.pid_swing_set(RIGHT_SWING, 300, 100);
+  chassis.pid_wait_quick();
   
+  //todo add correct degree
+  frontIn.move(0); //Stop Intake
+  backIn.move(0); //Stop Intake
+  chassis.pid_swing_set(RIGHT_SWING, 180, 100);
+  chassis.pid_wait_quick();
+  LittleW.extend();
+  frontIn.move(100); //Intake
+  backIn.move(-100); //Intake
+
+  chassis.pid_drive_set(11, 100); //Drive into match load
+  chassis.pid_wait_quick();
+  pros::delay(500); //Wait to intake balls
+
+  frontIn.move(0); //Stop Intake
+  backIn.move(0); //Stop Intake
+  chassis.pid_drive_set(-41.806, 100); //Drive into long goal
+  chassis.pid_wait_quick();
+  Wings.extend(); //Open Wings
+  frontIn.move(100);
+  backIn.move(-100);
+  topIn.move(100);
+  //todo check time
+  pros::delay(4000); //Wait to outtake completly
+
+  //todo tune to get balls into control zone
+  chassis.pid_drive_set(5, 127); //Back up to ram
+  chassis.pid_wait_quick();
+
+  chassis.pid_drive_set(-5, 127); //Ram into long goal
+  chassis.pid_wait_quick();
 }
 
+//* 5 Mid 3 Long Left
+void Auton_Functions::RED_Auton::r2(){
+  //todo make swing movements work
+  //todo tune speed on movements
+  frontIn.move(100); //Intake
+  backIn.move(-100); //Intake
+  //todo add correct degree 
+  //todo find timing for little will to grab balls
+  chassis.pid_swing_set(RIGHT_SWING, 300, 100);
+  chassis.pid_wait_quick();
+
+  frontIn.move(0); //Stop Intake
+  backIn.move(0); //Stop Intake
+  chassis.pid_drive_set(32.45, 100);//Drive back to mid goal
+  chassis.pid_wait_quick();
+
+  chassis.pid_turn_set(220, 100);//Turn to mid goal
+  chassis.pid_wait_quick();
+
+  chassis.pid_drive_set(-11.27,100); //Drive into mid goa;
+  chassis.pid_wait_quick();
+  //Outake to mid goal
+  frontIn.move(100); 
+  backIn.move(-100);
+  topIn.move(-100);
+  //todo tune time
+  pros::delay(1000);
+  //Stop Intake
+  frontIn.move(0);
+  backIn.move(0);
+  topIn.move(0);
+
+  chassis.pid_drive_set(55.14,100);//Drive to match load 
+  chassis.pid_wait_quick();
+
+  chassis.pid_turn_set(180 ,100); //Turn to match load
+  chassis.pid_wait();
+  LittleW.extend();//Put little will out
+
+  chassis.pid_drive_set(18.82, 100);
+  chassis.pid_wait_quick();
+  frontIn.move(100); //Intake
+  backIn.move(-100); //Intake
+
+  frontIn.move(0); //Stop Intake
+  backIn.move(0); //Stop Intake
+  chassis.pid_drive_set(-41.806, 100); //Drive into long goal
+  chassis.pid_wait_quick();
+  Wings.extend(); //Open Wings
+  frontIn.move(100);
+  backIn.move(-100);
+  topIn.move(100);
+  //todo check time
+  pros::delay(4000); //Wait to outtake completly
+
+  //todo tune to get balls into control zone
+  chassis.pid_drive_set(5, 127); //Back up to ram
+  chassis.pid_wait_quick();
+
+  chassis.pid_drive_set(-5, 127); //Ram into long goal
+  chassis.pid_wait_quick();
+}
 
 void Auton_Functions::RED_Auton::r3(){
  
@@ -170,10 +229,13 @@ void Auton_Functions::RED_Auton::r3(){
 
 //? BLUE FUNCTS
 
+//* 8 Ball Long Right
 void Auton_Functions::BLUE_Auton::b1(){
+ //todo add ram as last movement
  
 }
 
+//* 5 Mid 3 Long Right
 void Auton_Functions::BLUE_Auton::b2(){
 
 }

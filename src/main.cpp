@@ -245,11 +245,11 @@ void opcontrol() {
     }
 
     if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
-      Wings.toggle();
+      LittleW.toggle();
     } 
 
     if(master.get_digital_new_press(DIGITAL_RIGHT)) { // ALIGNER
-      Aligner.toggle();
+      Wings.toggle();
     }
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
