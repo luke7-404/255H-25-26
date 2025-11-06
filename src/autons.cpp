@@ -62,6 +62,13 @@ void Auton_Functions::AWP1(){
 }
 
 void Auton_Functions::AWP2(){
+  chassis.pid_drive_set(60, 127);
+  chassis.pid_wait_quick();
+  chassis.pid_turn_set(180, 127);
+  chassis.pid_wait_quick();
+  chassis.pid_drive_set(60,127);
+  chassis.pid_wait_quick();
+  pros::delay(1000);
 }
 
 void Auton_Functions::Skills(){
@@ -72,45 +79,49 @@ void Auton_Functions::Skills(){
 
 //* 8 Ball Long Left
 void Auton_Functions::RED_Auton::r1(){
-  //todo make swing movements work
   //todo tune speed on movements
   frontIn.move(100); //Intake
-  backIn.move(-100); //Intake
-  //todo add correct degree 
+  backIn.move(-127); //Intake
+  topIn.move(127); //Intake
   //todo find timing for little will to grab balls
-  chassis.pid_swing_set(RIGHT_SWING, 300, 100);
+  chassis.pid_drive_set(15, 100);
   chassis.pid_wait_quick();
-  
-  //todo add correct degree
-  frontIn.move(0); //Stop Intake
-  backIn.move(0); //Stop Intake
-  chassis.pid_swing_set(RIGHT_SWING, 180, 100);
+
+  chassis.pid_turn_set(325, 100);
   chassis.pid_wait_quick();
-  LittleW.extend();
+
+  chassis.pid_drive_set(28.5_in, 30);
+  chassis.pid_wait_until(15_in);
+  chassis.pid_speed_max_set(100);
+  chassis.pid_wait();
+  frontIn.move(0); //Intake
+  backIn.move(0); //Intake
+  topIn.move(0); //Intake
+
+  chassis.pid_swing_set(RIGHT_SWING, 270, 100);//Turn to balls below goal
+  chassis.pid_wait_quick();
   frontIn.move(100); //Intake
-  backIn.move(-100); //Intake
+  backIn.move(-127); //Intake
+  topIn.move(127); //Intake
+  
+  chassis.pid_drive_set(5.5, 30);//Drive into balls below goal
+  chassis.pid_wait();
+  LittleW.extend();
+  pros::delay(400);
 
-  chassis.pid_drive_set(11, 100); //Drive into match load
-  chassis.pid_wait_quick();
-  pros::delay(500); //Wait to intake balls
-
-  frontIn.move(0); //Stop Intake
-  backIn.move(0); //Stop Intake
-  chassis.pid_drive_set(-41.806, 100); //Drive into long goal
-  chassis.pid_wait_quick();
-  Wings.extend(); //Open Wings
-  frontIn.move(100);
-  backIn.move(-100);
-  topIn.move(100);
-  //todo check time
-  pros::delay(4000); //Wait to outtake completly
-
-  //todo tune to get balls into control zone
-  chassis.pid_drive_set(5, 127); //Back up to ram
+  chassis.pid_drive_set(-4, 30);//Drive back
   chassis.pid_wait_quick();
 
-  chassis.pid_drive_set(-5, 127); //Ram into long goal
+  chassis.pid_drive_set(2, 50);//Drive into ball
   chassis.pid_wait_quick();
+  LittleW.retract();
+
+  chassis.pid_swing_set(RIGHT_SWING, -270, 100);//Turn to balls below goal
+  chassis.pid_wait_quick();
+
+  chassis.pid_drive_set(-40, 100);
+  chassis.pid_wait_quick();
+
 }
 
 //* 5 Mid 3 Long Left

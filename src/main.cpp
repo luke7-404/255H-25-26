@@ -224,20 +224,20 @@ void opcontrol() {
     // . . .
 
     if (master.get_digital(DIGITAL_L1)){   // in-take through 
-      frontIn.move(100);
-      backIn.move(-100);
+      frontIn.move(127);
+      backIn.move(-127);
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through
-      frontIn.move(-100);
-      backIn.move(100);
-      topIn.move(100);
+      frontIn.move(-127);
+      backIn.move(127);
+      topIn.move(127);
     } else if (master.get_digital(DIGITAL_R1)){  // mid tier
-      frontIn.move(100);
-      backIn.move(-100);
-      topIn.move(-100);
+      frontIn.move(127);
+      backIn.move(-127);
+      topIn.move(-127);
     } else if (master.get_digital(DIGITAL_R2)){  // top tier
-      frontIn.move(100);
-      backIn.move(-100);
-      topIn.move(100);
+      frontIn.move(127);
+      backIn.move(-127);
+      topIn.move(127);
     } else {   // if all else, stop
       frontIn.brake();
       backIn.brake();
