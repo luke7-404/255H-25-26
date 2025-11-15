@@ -102,7 +102,72 @@ void Auton_Functions::AWP2(){
 }
 
 void Auton_Functions::Skills(){
+
+   frontIn.move(40); //Intake
+  backIn.move(-127); //Intake
+  topIn.move(30); //Intake
+
+  //drive towards the 4 balls
+  chassis.pid_drive_set(15, 100);
+  chassis.pid_wait_quick();
+
+  //turn to the 4 balls
+  chassis.pid_turn_set(-35, 100);
+  chassis.pid_wait();
+
+  //intake the 4 balls
+  chassis.pid_drive_set(21, 50);
+  chassis.pid_wait_quick();
+
+  //turn towards the long goal and extends little will
+  chassis.pid_turn_set(-146, 100);
+  chassis.pid_wait_quick();
+   LittleW.extend();
+
+  //drive towards the long goal
+  chassis.pid_drive_set(37, 80);
+  chassis.pid_wait();
+
+  //turn to face long goal
+  chassis.pid_turn_set(-180, 100);
+  chassis.pid_wait_quick();
  
+  //drive to long goal and clear it
+  chassis.pid_drive_set(15, 70);
+  chassis.pid_wait_quick();
+  pros::delay(3000);
+
+  //back away from loader into long goal
+  chassis.pid_drive_set(-28, 80, false, true);
+  chassis.pid_wait_quick();
+
+  //open wings and outtake into long goal
+  Wings.extend();
+  frontIn.move(127); //Intake
+  backIn.move(-127); //Intake
+  topIn.move(127); //Intake
+  pros::delay(5000);
+
+  //retract and back away from long goal
+  Wings.retract();
+  chassis.pid_drive_set(15, 80);
+  chassis.pid_wait_quick();
+
+  //turn to drive over to other quadrant
+   chassis.pid_turn_set(90, 80);
+  chassis.pid_wait_quick();
+
+  //drive to other quadrant(near park zone)
+   chassis.pid_drive_set(48, 80);
+  chassis.pid_wait_quick();
+
+  //turn to face the 4 balls
+  chassis.pid_turn_set(65, 80);
+  chassis.pid_wait_quick();
+ 
+  //drive to intake the 4 balls
+   chassis.pid_drive_set(28, 40);
+  chassis.pid_wait_quick();
 }
 
 //! RED FUNCTS
@@ -127,16 +192,17 @@ void Auton_Functions::RED_Auton::r1(){
   chassis.pid_turn_set(-146, 100);
   chassis.pid_wait_quick();
 
+  LittleW.extend();
   chassis.pid_drive_set(37, 80);
   chassis.pid_wait();
 
   chassis.pid_turn_set(-180, 100);
   chassis.pid_wait_quick();
-  LittleW.extend();
+  
 
   chassis.pid_drive_set(15, 70);
   chassis.pid_wait_quick();
-  pros::delay(50);
+  pros::delay(3000);
 
   chassis.pid_drive_set(-28, 80, false, true);
   chassis.pid_wait_quick();
@@ -144,6 +210,11 @@ void Auton_Functions::RED_Auton::r1(){
   frontIn.move(127); //Intake
   backIn.move(-127); //Intake
   topIn.move(127); //Intake
+  pros::delay(5000);
+  Wings.retract();
+  chassis.pid_drive_set(20, 80);
+   chassis.pid_wait();
+  chassis.pid_drive_set(-30, 100);
 
 }
 
@@ -151,53 +222,71 @@ void Auton_Functions::RED_Auton::r1(){
 void Auton_Functions::RED_Auton::r2(){
 
   //* 1 ball held
-  chassis.pid_drive_set(14.119, 100); // Drive off park zone
+  
+  chassis.pid_drive_set(14.119, 80); // Drive off park zone
   chassis.pid_wait_quick();
 
   //-30
   chassis.pid_turn_set(330, 100); // Turn to balls
-  chassis.pid_wait_quick();
+  chassis.pid_wait();
   frontIn.move(127); //Intake
   backIn.move(-127); //Intake
-  topIn.move(127); //Intake
+
 
   //todo tune to get all 3 every time
-  chassis.pid_drive_set(20.977, 40); // Drive into balls
-  chassis.pid_wait_quick();
+  chassis.pid_drive_set(22, 40); // Drive into balls
+  chassis.pid_wait();
   //* 4 balls held
 
+  // back to line up with mid goal
+  chassis.pid_drive_set(-8, 40);
+  chassis.pid_wait_quick();
+
   //-135
-  chassis.pid_turn_set(225, 100); // Turn to balls
+  chassis.pid_turn_set(225, 80); 
   chassis.pid_wait_quick();
 
   //* Score 4 on mid goal
-  chassis.pid_drive_set(-19.297, 100); // Drive to mid goal
+ 
+  chassis.pid_drive_set(-14, 80); // Drive to mid goal
   chassis.pid_wait_quick();
+   frontIn.move(-127);
+      backIn.move(127);
+      topIn.move(127);
+      pros::delay(500);
   frontIn.move(127); //Intake
   backIn.move(-127); //Intake
   topIn.move(-127); //Intake
-  //todo correct timing
-  pros::delay(300); //Wait to outtake 4 balls
+  pros::delay(1500); //Wait to outtake 4 balls
+  LittleW.extend();
 
-  chassis.pid_drive_set(53.724, 100); //Drive to long goal
+  chassis.pid_drive_set(50, 80); //Drive to long goal
   chassis.pid_wait_quick();
 
   //-180
-  chassis.pid_turn_set(180, 100);
+  chassis.pid_turn_set(180, 80);
   chassis.pid_wait_quick();
-  LittleW.extend();
+
+  
+   
+ 
+
+ 
+
   backIn.move(-50);
   topIn.move(0); //Intake
 
   //* 3 Balls held
   //todo fix distance so it doesn't do the stopping thing
-  chassis.pid_drive_set(21.049, 100, true, true); //Drive into match load
+  chassis.pid_drive_set(15, 60, true, true); //Drive into match load
   chassis.pid_wait_quick();
+  pros::delay(1800);
 
   //* Score 3 on long goal
   //todo fix distance so it doesn't do the stopping thing
-  chassis.pid_drive_set(39.666, 100, false, true); //Drive into long goal
+  chassis.pid_drive_set(-28, 80, false, true); //Drive into long goal
   chassis.pid_wait_quick();
+   Wings.extend();
   backIn.move(-127); //Intake
   topIn.move(127); //Intake
 }
