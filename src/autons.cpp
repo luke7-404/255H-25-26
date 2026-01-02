@@ -176,11 +176,11 @@ void Auton_Functions::Skills(){
 void Auton_Functions::RED_Auton::r1(){
   //todo tune speed on movements
   //todo fix distances on marked movements
-  frontIn.move(40); //Intake
+  frontIn.move(100); //Intake
   backIn.move(-127); //Intake
-  topIn.move(30); //Intake
+  topIn.move(100); //Intake
 
-  chassis.pid_drive_set(15, 100);
+  chassis.pid_drive_set(15, 100); 
   chassis.pid_wait_quick();
 
   chassis.pid_turn_set(-35, 100);
@@ -199,10 +199,8 @@ void Auton_Functions::RED_Auton::r1(){
   chassis.pid_turn_set(-180, 100);
   chassis.pid_wait_quick();
   
-
-  chassis.pid_drive_set(15, 70);
+  chassis.pid_drive_set(18, 80);
   chassis.pid_wait_quick();
-  pros::delay(3000);
 
   chassis.pid_drive_set(-28, 80, false, true);
   chassis.pid_wait_quick();
@@ -210,13 +208,13 @@ void Auton_Functions::RED_Auton::r1(){
   frontIn.move(127); //Intake
   backIn.move(-127); //Intake
   topIn.move(127); //Intake
-  pros::delay(5000);
+  pros::delay(3000);
   Wings.retract();
   chassis.pid_drive_set(20, 80);
    chassis.pid_wait();
   chassis.pid_drive_set(-30, 100);
 
-}
+} 
 
 //* 4 Mid 3 Long Left
 void Auton_Functions::RED_Auton::r2(){
@@ -254,9 +252,9 @@ void Auton_Functions::RED_Auton::r2(){
       backIn.move(127);
       topIn.move(127);
       pros::delay(500);
-  frontIn.move(127); //Intake
-  backIn.move(-127); //Intake
-  topIn.move(-127); //Intake
+      frontIn.move(127);
+      backIn.move(-127);
+      topIn.move(-127);
   pros::delay(1500); //Wait to outtake 4 balls
   LittleW.extend();
 
@@ -267,36 +265,31 @@ void Auton_Functions::RED_Auton::r2(){
   chassis.pid_turn_set(180, 80);
   chassis.pid_wait_quick();
 
-  
-   
- 
-
- 
-
   backIn.move(-50);
   topIn.move(0); //Intake
 
   //* 3 Balls held
   //todo fix distance so it doesn't do the stopping thing
-  chassis.pid_drive_set(15, 60, true, true); //Drive into match load
+  chassis.pid_drive_set(15, 70, true, true); //Drive into match load
   chassis.pid_wait_quick();
-  pros::delay(1800);
+  pros::delay(800);
 
   //* Score 3 on long goal
   //todo fix distance so it doesn't do the stopping thing
   chassis.pid_drive_set(-28, 80, false, true); //Drive into long goal
   chassis.pid_wait_quick();
    Wings.extend();
-  backIn.move(-127); //Intake
-  topIn.move(127); //Intake
+  frontIn.move(127);
+      backIn.move(-127);
+      topIn.move(127);
 }
 
 void Auton_Functions::RED_Auton::r3(){
   //todo tune speed on movements
   //todo fix distances on marked movements
-  frontIn.move(40); //Intake
+  frontIn.move(100); //Intake
   backIn.move(-127); //Intake
-  topIn.move(30); //Intake
+  topIn.move(100); //Intake
 
   chassis.pid_drive_set(15, 100);
   chassis.pid_wait_quick();
@@ -333,11 +326,117 @@ void Auton_Functions::RED_Auton::r3(){
 
 //* 7 Ball Long Right
 void Auton_Functions::BLUE_Auton::b1(){
+//todo tune speed on movements
+  //todo fix distances on marked movements
+  frontIn.move(100); //Intake
+  backIn.move(-127); //Intake
+  topIn.move(100); //Intake
+
+  chassis.pid_drive_set(15, 100);
+  chassis.pid_wait_quick();
+
+  chassis.pid_turn_set(35, 100);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(21, 50);
+  chassis.pid_wait_quick();
+
+  chassis.pid_turn_set(146, 100);
+  LittleW.extend();
+  chassis.pid_wait_quick();
+
+  chassis.pid_drive_set(37, 80);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(180, 100);
+  chassis.pid_wait_quick();
+  
+  //chassis.pid_drive_set(-8, 100);
+  //chassis.pid_wait_quick();
+  
+  chassis.pid_drive_set(18, 80);
+  chassis.pid_wait_quick();
+
+  chassis.pid_drive_set(-28, 80, false, true);
+  chassis.pid_wait_quick();
+  Wings.extend();
+  frontIn.move(127); //Intake
+  backIn.move(-127); //Intake
+  topIn.move(127); //Intake
+  pros::delay(3000);
+  Wings.retract();
+
+  chassis.pid_drive_set(20, 80);
+   chassis.pid_wait();
+  chassis.pid_drive_set(-30, 100);
+
 }
 
 //* 4 Mid 3 Long Right
 void Auton_Functions::BLUE_Auton::b2(){
 
+  //* 1 ball held
+  
+  chassis.pid_drive_set(14.119, 80); // Drive off park zone
+  chassis.pid_wait_quick();
+
+  //-30
+  chassis.pid_turn_set(30, 100); // Turn to balls
+  chassis.pid_wait();
+  frontIn.move(127); //Intake
+  backIn.move(-127); //Intake
+
+
+  //todo tune to get all 3 every time
+  chassis.pid_drive_set(22, 40); // Drive into balls
+  chassis.pid_wait();
+  //* 4 balls held
+
+  // back to line up with mid goal
+  chassis.pid_drive_set(-8, 40);
+  chassis.pid_wait_quick();
+
+  //-135
+  chassis.pid_turn_set(135, 80); 
+  chassis.pid_wait_quick();
+
+  //* Score 4 on mid goal
+ 
+  chassis.pid_drive_set(-14, 80); // Drive to mid goal
+  chassis.pid_wait_quick();
+   frontIn.move(-127);
+      backIn.move(127);
+      topIn.move(127);
+      pros::delay(500);
+  frontIn.move(127); //Intake
+  backIn.move(-127); //Intake
+  topIn.move(-127); //Intake
+  pros::delay(1500); //Wait to outtake 4 balls
+  LittleW.extend();
+
+  chassis.pid_drive_set(50, 80); //Drive to long goal
+  chassis.pid_wait_quick();
+
+  //-180
+  chassis.pid_turn_set(180, 80);
+  chassis.pid_wait_quick();
+
+  backIn.move(-50);
+  topIn.move(0); //Intake
+
+  //* 3 Balls held
+  //todo fix distance so it doesn't do the stopping thing
+  chassis.pid_drive_set(15, 75, true, true); //Drive into match load
+  chassis.pid_wait_quick();
+  pros::delay(1800);
+
+  //* Score 3 on long goal
+  //todo fix distance so it doesn't do the stopping thing
+  chassis.pid_drive_set(-28, 80, false, true); //Drive into long goal
+  chassis.pid_wait_quick();
+   Wings.extend();
+  backIn.move(-127); //Intake
+  topIn.move(127); //Intake
 }
 
 void Auton_Functions::BLUE_Auton::b3(){
