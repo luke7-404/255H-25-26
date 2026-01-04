@@ -8,11 +8,11 @@
 // Chassis constructor.
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-11, -12, 13},     // Left Chassis Ports (negative port will reverse it!)
-    {1, 2, -3},  // Right Chassis Ports (negative port will reverse it!)
+    {11, -12, -13},     // Left Chassis Ports (negative port will reverse it!)
+    {-1, 2, 3},  // Right Chassis Ports (negative port will reverse it!)
 
    
-    4,      // IMU Port      
+    21,      // IMU Port      
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -223,33 +223,32 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
-    if (master.get_digital(DIGITAL_L1)){   // in-take through 
-      frontIn.move(127);
-      backIn.move(-127);
-    } else if (master.get_digital(DIGITAL_L2)){  // out-take through
-      frontIn.move(-127);
-      backIn.move(127);
+    if (master.get_digital(DIGITAL_L1)){   // in-take through bottom intake only
+      botIn.move(127);
+
+    } else if (master.get_digital(DIGITAL_L2)){  // out-take through bottom intake only
+      botIn.move(-127);
+
+    } else if (master.get_digital(DIGITAL_R1)){  // in-take through full intake
       topIn.move(127);
-    } else if (master.get_digital(DIGITAL_R1)){  // mid tier
-      frontIn.move(127);
-      backIn.move(-127);
+      botIn.move(127);
+
+    } else if (master.get_digital(DIGITAL_R2)){  // out-take through full intake
       topIn.move(-127);
-    } else if (master.get_digital(DIGITAL_R2)){  // top tier
-      frontIn.move(127);
-      backIn.move(-127);
-      topIn.move(127);
+      botIn.move(-127);
+    
     } else {   // if all else, stop
-      frontIn.brake();
-      backIn.brake();
       topIn.brake();
-    }
+      botIn.brake();
+    
+    };
 
     if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
       LittleW.toggle();
     } 
 
     if(master.get_digital_new_press(DIGITAL_RIGHT)) { // ALIGNER
-      Wings.toggle();
+      descore.toggle();
     }
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();

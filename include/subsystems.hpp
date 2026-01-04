@@ -8,14 +8,14 @@ extern Drive chassis;
 // Your motors, sensors, etc. should go here.  Below are examples
 
 // intake motor group
-inline std::vector<pros::Motor> intakeMotors = {pros::Motor(10), pros::Motor(14), pros::Motor(9)};
-#define frontIn intakeMotors[0]
-#define backIn intakeMotors[1]
-#define topIn intakeMotors[2]
+inline std::vector<pros::Motor> intakeMotors = {pros::Motor(7), pros::Motor(6)};
+#define topIn intakeMotors[0]
+#define botIn intakeMotors[1]
+
 
 // PNEUMATICS
-inline pros::adi::Pneumatics LittleW('A', false);
-inline pros::adi::Pneumatics Wings('D', false);
+inline pros::adi::Pneumatics LittleW('H', false);
+inline pros::adi::Pneumatics descore('B', false);
 
 // The color sensor
 // inline pros::Optical name(6);
