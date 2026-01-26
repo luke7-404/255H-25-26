@@ -243,12 +243,16 @@ void opcontrol() {
     
     };
 
-    if(master.get_digital_new_press(DIGITAL_Y)) { // PNEUMATICS
+    if(master.get_digital_new_press(DIGITAL_Y)) { // LittleW
       LittleW.toggle();
     } 
 
-    if(master.get_digital_new_press(DIGITAL_RIGHT)) { // ALIGNER
+    if(master.get_digital_new_press(DIGITAL_RIGHT)) { // Descore
       descore.toggle();
+    }
+
+    if(master.get_digital_new_press(DIGITAL_A)) { // Mid Pnuematics
+      midScore.toggle();
     }
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();

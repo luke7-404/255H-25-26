@@ -111,6 +111,25 @@ void Auton_Functions::Skills(){
   chassis.pid_wait_quick();
    chassis.pid_turn_set(90, 80); //turn to loader
   chassis.pid_wait();
+  chassis.pid_drive_set(-10, 80); // back up
+  chassis.pid_wait();
+  LittleW.extend();   // extend pneumatics
+  chassis.pid_drive_set(21, 60); // drive into loader
+  pros::delay(2200);
+  chassis.pid_drive_set(-34, 70); // drive into long goal
+  chassis.pid_wait_quick();
+  topIn.move(-80); // outtake
+  pros::delay(2200);
+  chassis.pid_drive_set(10, 70); // drive into long goal
+  chassis.pid_wait_quick();
+  chassis.pid_turn_set(70, 80); //turn to long goal
+  chassis.pid_wait();
+   chassis.pid_drive_set(35, 70); // drive into long goal
+  chassis.pid_wait_quick();
+   chassis.pid_turn_set(0, 80); //turn to long goal
+  chassis.pid_wait();
+  chassis.pid_drive_set(30, 70); // drive into long goal
+  chassis.pid_wait_quick();
 }
 
 //! RED FUNCTS
@@ -118,32 +137,35 @@ void Auton_Functions::Skills(){
 // 7 right
 void Auton_Functions::RED_Auton::r1(){
   chassis.pid_drive_set(14, 80); // Drive off park zone
- chassis.pid_wait();
+ chassis.pid_wait_quick();
   chassis.pid_turn_set(340, 100); // Turn to balls
-  chassis.pid_wait();
-  botIn.move(-127); // Start intake
-  chassis.pid_drive_set(22, 40); // Drive into balls
+  chassis.pid_wait_quick();
+   botIn.move(-100); // Start intake
+  topIn.move(20); // outtake
+  chassis.pid_drive_set(24, 40); // Drive into balls
   chassis.pid_wait();  //* 4 balls held
-  chassis.pid_drive_set(-8, 40); // back to line up for loader
+  chassis.pid_drive_set(-8, 80); // back to line up for loader
   chassis.pid_wait_quick();
   chassis.pid_turn_set(225, 80); //turn to loader
   chassis.pid_wait_quick();
 
-  chassis.pid_drive_set(37, 80); // drive to loader
+  chassis.pid_drive_set(37, 100); // drive to loader
   chassis.pid_wait();
 
   chassis.pid_turn_set(-180, 80); //turn to loader
   chassis.pid_wait_quick();
   LittleW.extend();   // extend pneumatics
-  chassis.pid_drive_set(-10, 80); // drive into loader
-  chassis.pid_wait_quick();
-  chassis.pid_drive_set(19, 60); // drive into loader
-  chassis.pid_wait_quick();
   pros::delay(100);
-  chassis.pid_drive_set(-34, 80); // drive into loader
+  chassis.pid_drive_set(-5, 80); // drive into loader
+  chassis.pid_wait_quick();
+  chassis.pid_drive_set(16, 60); // drive into loader
+  chassis.pid_wait_quick();
+  pros::delay(200);
+  chassis.pid_drive_set(-30, 100); // drive into loader
   chassis.pid_wait_quick();
   topIn.move(-127); // outtake
   botIn.move(-127); // Start intake
+  pros::delay(2000);
   
 } 
 
@@ -153,29 +175,39 @@ void Auton_Functions::RED_Auton::r2(){
  chassis.pid_wait();
   chassis.pid_turn_set(20, 100); // Turn to balls
   chassis.pid_wait();
-  botIn.move(-127); // Start intake
+  botIn.move(-100); // Start intake
+  topIn.move(20); // outtake
   chassis.pid_drive_set(24, 40); // Drive into balls
   chassis.pid_wait();  //* 4 balls held
-  chassis.pid_drive_set(-8, 40); // back to line up for loader
+  botIn.brake();
+  topIn.brake();
+  chassis.pid_drive_set(-8, 80); // back to line up for loader
   chassis.pid_wait_quick();
   chassis.pid_turn_set(135, 80); //turn to loader
   chassis.pid_wait_quick();
 
-  chassis.pid_drive_set(37, 80); // drive to loader
+  chassis.pid_drive_set(37, 100); // drive to loader
   chassis.pid_wait();
 
   chassis.pid_turn_set(180, 80); //turn to loader
-  chassis.pid_wait_quick();
+  chassis.pid_wait();
   LittleW.extend();   // extend pneumatics
-  chassis.pid_drive_set(-10, 80); // back up
+  pros::delay(100);
+  botIn.move(-100); // Start intake
+  topIn.move(20); // outtake
+  chassis.pid_drive_set(-5, 80); // back up
   chassis.pid_wait_quick();
-  chassis.pid_drive_set(19, 60); // drive into loader
+  chassis.pid_drive_set(16, 80); // drive into loader
   chassis.pid_wait_quick();
-  pros::delay(1200); 
-  chassis.pid_drive_set(-34, 80); // drive into long goal
+  pros::delay(100); 
+  chassis.pid_drive_set(-32, 100); // drive into long goal
   chassis.pid_wait_quick();
+  topIn.move(127); // outtake
+  botIn.move(50); // Start intake
+  pros::delay(50); 
   topIn.move(-127); // outtake
   botIn.move(-127); // Start intake
+  pros::delay(2000);
 }
 
 void Auton_Functions::RED_Auton::r3(){
@@ -199,67 +231,35 @@ void Auton_Functions::BLUE_Auton::b1(){
   chassis.pid_wait();  //* 4 balls held
   chassis.pid_drive_set(-8, 40); // back to line up with mid goal
   chassis.pid_wait_quick();
-  chassis.pid_turn_set(135, 80); //turn to mid goal
+  chassis.pid_turn_set(-40, 80); //turn to mid goal
   chassis.pid_wait_quick();
-  chassis.pid_drive_set(-13, 80); // Drive to mid goal
+  chassis.pid_drive_set(-3, 80); // Drive to mid goal
   chassis.pid_wait_quick();
-  topIn.move(-70); // outtake to mid goal
+  topIn.move(127); // outtake to mid goal
   pros::delay(1500);
   topIn.brake();
+
   chassis.pid_drive_set(50, 80); // drive to loader
   chassis.pid_wait();
 
-  chassis.pid_turn_set(180, 80); //turn to loader
+    chassis.pid_turn_set(-180, 80); //turn to loader
   chassis.pid_wait_quick();
   LittleW.extend();   // extend pneumatics
-  chassis.pid_drive_set(-10, 80); // drive into loader
+  pros::delay(100);
+  chassis.pid_drive_set(-5, 80); // drive into loader
   chassis.pid_wait_quick();
-  chassis.pid_drive_set(19, 60); // drive into loader
+  chassis.pid_drive_set(16, 60); // drive into loader
   chassis.pid_wait_quick();
-  pros::delay(1200);
-  chassis.pid_drive_set(-34, 80); // drive into loader
+  pros::delay(200);
+  chassis.pid_drive_set(-30, 100); // drive into loader
   chassis.pid_wait_quick();
   topIn.move(-127); // outtake
   botIn.move(-127); // Start intake
+  pros::delay(2000);
 }
 
 // 3/4 left 
 void Auton_Functions::BLUE_Auton::b2(){
-
-  //* 1 ball held (starting position)
-  
-  chassis.pid_drive_set(14, 80); // Drive off park zone
- chassis.pid_wait();
-  chassis.pid_turn_set(340, 100); // Turn to balls
-  chassis.pid_wait();
-  botIn.move(-127); // Start intake
-  chassis.pid_drive_set(24, 40); // Drive into balls
-  chassis.pid_wait();  //* 4 balls held
-  chassis.pid_drive_set(-8, 40); // back to line up with mid goal
-  chassis.pid_wait_quick();
-  chassis.pid_turn_set(225, 80); //turn to mid goal
-  chassis.pid_wait_quick();
-  chassis.pid_drive_set(-13, 80); // Drive to mid goal
-  chassis.pid_wait_quick();
-  topIn.move(-70); // outtake to mid goal
-  pros::delay(1500);
-  topIn.brake();
-  chassis.pid_drive_set(50, 80); // drive to loader
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(-180, 80); //turn to loader
-  chassis.pid_wait_quick();
-  LittleW.extend();   // extend pneumatics
-  chassis.pid_drive_set(-10, 80); // drive into loader
-  chassis.pid_wait_quick();
-  chassis.pid_drive_set(19, 60); // drive into loader
-  chassis.pid_wait_quick();
-  pros::delay(1200);
-  chassis.pid_drive_set(-34, 80); // drive into loader
-  chassis.pid_wait_quick();
-  topIn.move(-127); // outtake
-  botIn.move(-127); // Start intake
-  
 }
 
 void Auton_Functions::BLUE_Auton::b3(){

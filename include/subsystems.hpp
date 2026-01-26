@@ -16,6 +16,7 @@ inline std::vector<pros::Motor> intakeMotors = {pros::Motor(-7), pros::Motor(6)}
 // PNEUMATICS
 inline pros::adi::Pneumatics LittleW('H', false);
 inline pros::adi::Pneumatics descore('B', false);
+inline pros::adi::Pneumatics midScore('C', false);
 
 // The color sensor
 // inline pros::Optical name(6);
