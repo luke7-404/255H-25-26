@@ -228,6 +228,7 @@ void opcontrol() {
 
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through bottom intake only
       botIn.move(-127);
+      topIn.move(20);
 
     } else if (master.get_digital(DIGITAL_R1)){  // in-take through full intake
       topIn.move(127);
