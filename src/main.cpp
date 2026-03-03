@@ -9,10 +9,10 @@
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
     {11, -12, -13},     // Left Chassis Ports (negative port will reverse it!)
-    {-1, 2, 3},  // Right Chassis Ports (negative port will reverse it!)
+    {18, 19, -20},  // Right Chassis Ports (negative port will reverse it!)
 
    
-    21,      // IMU Port      
+    17,      // IMU Port      
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -225,20 +225,13 @@ void opcontrol() {
 
     if (master.get_digital(DIGITAL_L1)){   // in-take through bottom intake only
       botIn.move(127);
+      topIn.move(-127);
 
     } else if (master.get_digital(DIGITAL_L2)){  // out-take through bottom intake only
       botIn.move(-127);
-      topIn.move(20);
-
-    } else if (master.get_digital(DIGITAL_R1)){  // in-take through full intake
       topIn.move(127);
-      botIn.move(127);
 
-    } else if (master.get_digital(DIGITAL_R2)){  // out-take through full intake
-      topIn.move(-127);
-      botIn.move(-127);
-    
-    } else {   // if all else, stop
+    }  else {   // if all else, stop
       topIn.brake();
       botIn.brake();
     

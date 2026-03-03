@@ -25,9 +25,9 @@ void default_constants() {
   chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
 
   // Exit conditions
-  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 200_ms, 500_ms);
-  chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 100_ms, 3_in, 100_ms, 250_ms);
+  chassis.pid_turn_exit_condition_set(50_ms, 3_deg, 100_ms, 7_deg, 100_ms, 100_ms);
+  chassis.pid_swing_exit_condition_set(50_ms, 3_deg, 100_ms, 7_deg, 100_ms, 100_ms);
+  chassis.pid_drive_exit_condition_set(50_ms, 1_in, 100_ms, 3_in, 100_ms, 100_ms);
   chassis.pid_odom_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 750_ms);
   chassis.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
   chassis.pid_turn_chain_constant_set(3_deg);
@@ -58,92 +58,29 @@ void default_constants() {
 
 //Solo AWP 
 void Auton_Functions::AWP1(){
-
-chassis.pid_drive_set(14, 100); // Drive off park zone
- chassis.pid_wait_quick();
- descore.extend();
-  chassis.pid_turn_set(340, 100); // Turn to balls
-  chassis.pid_wait();
-  botIn.move(-100); // Start intake
-  topIn.brake();
-  topIn.move(20); // outtake
-  chassis.pid_drive_set(24, 80); // Drive into balls
-  chassis.pid_wait();  //* 4 balls held
-  botIn.brake();
-  chassis.pid_drive_set(-8, 100); // back to line up for loader
+  chassis.pid_drive_set(48, 127, false, true); // drive to loader
   chassis.pid_wait_quick();
-  chassis.pid_turn_set(225, 100); //turn to loader
+  chassis.pid_turn_set(-90, 127); //turn to loader
   chassis.pid_wait_quick();
-
-  chassis.pid_drive_set(37, 100); // drive to loader
+  chassis.pid_drive_set(48, 127, false, true); // drive to loader
   chassis.pid_wait_quick();
-
-  chassis.pid_turn_set(180, 100); //turn to loader
-  chassis.pid_wait();
-   chassis.pid_drive_set(-20, 100); // drive to loader
+  chassis.pid_turn_set(-180, 127); //turn to loader
   chassis.pid_wait_quick();
-    topIn.move(127); // outtake
-  botIn.move(50); // Start intake
-  pros::delay(50); 
-  topIn.move(-127); // outtake
-  botIn.move(-127); // Start intake
-  pros::delay(1400);
-  chassis.pid_drive_set(6, 100); // drive to loader
+  chassis.pid_drive_set(48, 127, false, true); // drive to loader
   chassis.pid_wait_quick();
-  chassis.pid_turn_set(90, 100); //turn to loader
-  chassis.pid_wait();
-  chassis.pid_drive_set(10, 100); // drive to loader
+  chassis.pid_turn_set(-270, 127); //turn to loader
   chassis.pid_wait_quick();
-  descore.retract();
-  chassis.pid_turn_set(0, 100); //turn to loader
-  chassis.pid_wait();
-  chassis.pid_drive_set(29, 75); // drive to loader
-  chassis.pid_wait_quick(); 
+  chassis.pid_drive_set(48, 127, false, true); // drive to loader
+  chassis.pid_wait_quick();
+  chassis.pid_turn_set(0, 127); //turn to loader
+  chassis.pid_wait_quick();
+  pros::delay(500);
 }
 
 void Auton_Functions::AWP2(){   
-
-chassis.pid_drive_set(14, 100); // Drive off park zone
- chassis.pid_wait_quick();
- descore.extend();
-  chassis.pid_turn_set(20, 100); // Turn to balls
+ chassis.pid_swing_set(LEFT_SWING, 180, 127);
   chassis.pid_wait();
-  botIn.move(-100); // Start intake
-  topIn.move(20); // outtake
-  chassis.pid_drive_set(24, 80); // Drive into balls
-  chassis.pid_wait();  //* 4 balls held
-  botIn.brake();
-  topIn.brake();
-  chassis.pid_drive_set(-8, 100); // back to line up for loader
-  chassis.pid_wait_quick();
-  chassis.pid_turn_set(135, 100); //turn to loader
-  chassis.pid_wait_quick();
-
-  chassis.pid_drive_set(37, 100); // drive to loader
-  chassis.pid_wait_quick();
-
-  chassis.pid_turn_set(180, 100); //turn to loader
-  chassis.pid_wait();
-   chassis.pid_drive_set(-21, 90); // drive to loader
-  chassis.pid_wait_quick();
-    topIn.move(127); // outtake
-  botIn.move(50); // Start intake
-  pros::delay(50); 
-  topIn.move(-127); // outtake
-  botIn.move(-127); // Start intake
-  pros::delay(1400);
-  chassis.pid_drive_set(6, 100); // drive to loader
-  chassis.pid_wait_quick();
-  chassis.pid_turn_set(270, 100); //turn to loader
-  chassis.pid_wait();
- chassis.pid_drive_set(11.5, 100); // drive to loader
-  chassis.pid_wait_quick();
-  descore.retract();
-  chassis.pid_turn_set(180, 100); //turn to loader
-  chassis.pid_wait();
-  chassis.pid_drive_set(-25, 60); // drive to loader
-  chassis.pid_wait_quick();
-
+  pros::delay(500);
 }
 
 void Auton_Functions::Skills(){
