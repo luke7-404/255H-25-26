@@ -15,8 +15,10 @@ inline std::vector<pros::Motor> intakeMotors = {pros::Motor(15), pros::Motor(16)
 
 // PNEUMATICS
 inline pros::adi::Pneumatics LittleW('H', false);
-inline pros::adi::Pneumatics descore('B', false);
-inline pros::adi::Pneumatics midScore('C', false);
+inline pros::adi::Pneumatics descore('D', false);
+inline pros::adi::Pneumatics BScore('C', false); // when Both A and B are both not extended it is in long goal scoring mode // 
+inline pros::adi::Pneumatics AScore('B', false); // when only B is extended it is in holding mode //
+                                                 // When Both A and B are both extended it is in Mid goal scoring mode //
 
 // The color sensor
 // inline pros::Optical name(6);

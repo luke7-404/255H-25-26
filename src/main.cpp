@@ -8,11 +8,11 @@
 // Chassis constructor.
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {11, -12, -13},     // Left Chassis Ports (negative port will reverse it!)
-    {18, 19, -20},  // Right Chassis Ports (negative port will reverse it!)
+    {14, -12, -13},  // Left Chassis Ports (negative port will reverse it!)
+    {-17, 18, 21},  // Right Chassis Ports (negative port will reverse it!)
 
    
-    17,      // IMU Port      
+    4,      // IMU Port      
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -184,7 +184,7 @@ void ez_template_extras() {
       chassis.pid_tuner_toggle();
 
     // Trigger the selected autonomous routine
-    if (master.get_digital(DIGITAL_B) && master.get_digital(DIGITAL_DOWN)) {
+    if (master.get_digital(DIGITAL_A) && master.get_digital(DIGITAL_LEFT)) {
       pros::motor_brake_mode_e_t preference = chassis.drive_brake_get();
       autonomous();
       chassis.drive_brake_set(preference);
@@ -218,36 +218,47 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
-  while (true) {
+ while (true) {
 // . . .
     // Put more user control code here!
     // . . .
 
-    if (master.get_digital(DIGITAL_L1)){   // in-take through bottom intake only
+    if (master.get_digital(DIGITAL_L1)){   // outtake
       botIn.move(127);
       topIn.move(-127);
 
-    } else if (master.get_digital(DIGITAL_L2)){  // out-take through bottom intake only
-      botIn.move(-127);
+    } else if (master.get_digital(DIGITAL_L2)){  // store
+      BScore.extend();
+      AScore.extend();
+       botIn.move(-127);
       topIn.move(127);
 
-    }  else {   // if all else, stop
+    } else if (master.get_digital(DIGITAL_R2)){ // long goal score
+      AScore.retract();
+      BScore.extend();
+      botIn.move(-127);
+      topIn.move(127);
+      
+    } else if (master.get_digital(DIGITAL_R1)){  // mid goal score
+      AScore.extend();
+      BScore.retract();
+      botIn.move(-75);
+      topIn.move(75);
+    } else {   // if all else, stop
       topIn.brake();
       botIn.brake();
     
     };
 
-    if(master.get_digital_new_press(DIGITAL_Y)) { // LittleW
+    if(master.get_digital_new_press(DIGITAL_B)) { // LittleW
       LittleW.toggle();
     } 
 
-    if(master.get_digital_new_press(DIGITAL_RIGHT)) { // Descore
+    if(master.get_digital_new_press(DIGITAL_DOWN)) { // Descore
       descore.toggle();
     }
 
-    if(master.get_digital_new_press(DIGITAL_A)) { // Mid Pnuematics
-      midScore.toggle();
-    }
+   
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
 
