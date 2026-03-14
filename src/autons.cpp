@@ -423,8 +423,8 @@ void Auton_Functions::BLUE_Auton::b1(){
  chassis.pid_wait();
   AScore.extend();
   BScore.retract();
-  botIn.move(-90);
-  topIn.move(90);
+  botIn.move(-100);
+  topIn.move(100);
   pros::delay(1100); // outtake
   botIn.move(0);
   topIn.move(0);
@@ -440,7 +440,7 @@ void Auton_Functions::BLUE_Auton::b1(){
  topIn.move(127);
   chassis.pid_drive_set(13, 80); // drive to balls
  chassis.pid_wait();
- pros::delay(300);
+ pros::delay(250);
   chassis.pid_drive_set(-29, 100); // drive to balls
  chassis.pid_wait();
  LittleW.retract();  // retract little will
@@ -469,10 +469,16 @@ void Auton_Functions::BLUE_Auton::b2(){
 }
 
 void Auton_Functions::BLUE_Auton::b3(){
-   botIn.move(127);
-      topIn.move(-127);
-LittleW.extend();
-chassis.pid_drive_set(80, 9999);
+   chassis.pid_drive_set(22, 55,false, true); // back up from loader
+ chassis.pid_wait_quick();
+ chassis.pid_turn_set(120, 100); //turn final push position
+ chassis.pid_wait_quick();
+ chassis.pid_drive_set(-24, 55,false, true); // back up from loader
+ chassis.pid_wait_quick();
+ chassis.pid_swing_set(ez::RIGHT_SWING, 90_deg, 90); //Swing to face the wall
+ chassis.pid_wait_quick();
+
+chassis.pid_drive_set(-80, 90);
 chassis.pid_wait_until(80);
 pros::delay(1000);
 }
